@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Personalizado</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #1c1c1c;
+        }
+
+        .login-container {
+            background-color: rgba(28, 28, 28, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 255, 204, 0.2);
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.1);
+        }
+
+        .login-title {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 1.5rem;
+            color: #00ffcc;
+            text-shadow: 0 0 10px rgba(0, 255, 204, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .form-group i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #00ffcc;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            padding-left: 2.5rem;
+            background-color: rgba(28, 28, 28, 0.8);
+            border: 1px solid rgba(0, 255, 204, 0.3);
+            border-radius: 4px;
+            font-size: 1rem;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #00ffcc;
+            box-shadow: 0 0 10px rgba(0, 255, 204, 0.2);
+        }
+
+        .form-control::placeholder {
+            color: rgba(0, 255, 204, 0.5);
+        }
+
+        .error-message {
+            color: #00ffcc;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: none;
+            text-align: center;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: transparent;
+            color: #00ffcc;
+            border: 1px solid #00ffcc;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-login:hover {
+            background-color: rgba(0, 255, 204, 0.1);
+            box-shadow: 0 0 15px rgba(0, 255, 204, 0.3);
+        }
+
+        .forgot-password {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .forgot-password a {
+            color: rgba(0, 255, 204, 0.7);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password a:hover {
+            color: #00ffcc;
+            text-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
+        }
+
+        #loginError {
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2 class="login-title">Iniciar Sesión</h2>
+        <div class="error-message" id="loginError">Credenciales incorrectas</div>
+        <form id="loginForm">
+            <div class="form-group">
+                <i class="fas fa-user"></i>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="username" 
+                    placeholder="Usuario"
+                    required
+                >
+            </div>
+            
+            <div class="form-group">
+                <i class="fas fa-lock"></i>
+                <input 
+                    type="password" 
+                    class="form-control" 
+                    id="password" 
+                    placeholder="Contraseña"
+                    required
+                >
+            </div>
+
+            <button type="submit" class="btn-login">
+                Iniciar Sesión
+            </button>
+        </form>
+
+        <div class="forgot-password">
+            <a href="https://wa.me/573180054426">¿Olvidaste tu contraseña?</a>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('loginForm');
+        const username = document.getElementById('username');
+        const password = document.getElementById('password');
+        const loginError = document.getElementById('loginError');
+
+        // Lista de usuarios autorizados
+        const authorizedUsers = [
+            { username: 'mario3112009@gmail.com', password: 'cmario311', role: 'admin' },
+            { username: 'Andres', password: 'xxx1234@@', role: 'admin' },
+            { username: 'juan', password: '4321', role: 'user' },
+            { username: 'ana', password: '8765', role: 'user' },
+            { username: 'pedro', password: '2468', role: 'supervisor' }
+        ];
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Buscar usuario en la lista de autorizados
+            const user = authorizedUsers.find(u => 
+                u.username === username.value && u.password === password.value
+            );
+
+            if (user) {
+                loginError.style.display = 'none';
+                // Guardar información del usuario en sessionStorage
+                sessionStorage.setItem('currentUser', JSON.stringify({
+                    username: user.username,
+                    role: user.role
+                }));
+                // Redirigir al index
+                window.location.href = 'index.html';
+            } else {
+                loginError.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
