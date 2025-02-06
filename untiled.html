@@ -812,6 +812,39 @@ imagen: "https://m.media-amazon.com/images/M/MV5BZTcyNjk1MjgtOWI3Mi00YzQwLWI5MTk
         });
 
         renderizarPeliculas();
+function shuffle(array) {
+    // Implementación del algoritmo Fisher-Yates shuffle
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+function filtrarPeliculas() {
+    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+    let filtered = [...peliculas]; // Creamos una copia del array original
+    
+    // Primero aplicamos el shuffle a la copia
+    filtered = shuffle(filtered);
+
+    if (currentCategory !== 'todos') {
+        if (currentCategory === 'favoritos') {
+            filtered = filtered.filter(p => favorites.includes(p.titulo));
+        } else {
+            filtered = filtered.filter(p => p.categoria === currentCategory);
+        }
+    }
+
+    if (searchTerm) {
+        filtered = filtered.filter(p => 
+            p.titulo.toLowerCase().includes(searchTerm) ||
+            p.descripcion.toLowerCase().includes(searchTerm)
+        );
+    }
+
+    return filtered;
+}
     </script>
 </body>
 </html>
