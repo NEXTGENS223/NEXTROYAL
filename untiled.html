@@ -227,6 +227,9 @@
             background: #00ffcc;
             color: #000;
         }
+        .logo img {
+                max-height: 150px;
+        }
 
         /* Media Queries para Responsividad */
         @media (max-width: 768px) {
@@ -307,14 +310,18 @@
             .modal iframe {
                 height: 150px;
             }
+        
+        
+
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="header-content">
-            <div class="header-top">
-                <h1>Next Royal</h1>
+        <div class="header-content">  
+                    <div class="logo">
+                        <img src="logo.png" alt="Logo de NEXTGENS">
+                    </div>
             </div>
             <div class="search-container">
                 <input type="text" class="search-input" placeholder="Buscar películas..." id="searchInput">
@@ -326,7 +333,9 @@
                 <button class="category-btn" data-category="drama">Drama</button>
                 <button class="category-btn" data-category="comedia">Comedia</button>
                 <button class="category-btn" data-category="ciencia-ficcion">Ciencia Ficción</button>
+                <button class="category-btn" data-category="terror">Terror</button>
                 <button class="category-btn" data-category="favoritos">Favoritos</button>
+
             </div>
         </div>
     </header>
@@ -338,7 +347,7 @@
 
     <div id="modal" class="modal">
         <div class="modal-content">
-            <button class="modal-close" onclick="cerrarModal()">×</button>
+            <button class="modal-close" onclick="cerrarModal()">CIERRA ESA MNDA</button>
             <h2 id="modal-title"></h2>
             <iframe id="modal-video" frameborder="0" allowfullscreen></iframe>
             <div id="modal-description"></div>
@@ -350,13 +359,21 @@
         const ITEMS_PER_PAGE = 30;
         let currentCategory = 'todos';
         let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-
+        
         const peliculas = [
 
+        {
+        titulo: "Cars",
+        videoID: "1L6-dNGt3fF0ozpte_-otJZzpjOMJw_MX",
+        descripcion: "Cars. <br> calidad 1080p.",
+        categoria: "ciencia-ficcion",
+        rating: 4.8,
+        imagen: "https://es.web.img2.acsta.net/pictures/14/05/28/11/24/435900.jpg"
+        },
 {
         titulo: "Wicked",
         videoID: "1NAuZ1JiR7SasLLYdxNYN1QVqoqIrtW0m",
-        descripcion: "Wicked.",
+        descripcion: "Wicked. <br> Calidad p",
         categoria: "ciencia-ficcion",
         rating: 4.8,
         imagen: "https://es.web.img2.acsta.net/img/4a/a3/4aa3265d76c8d07e0315f48a76205386.jpg"
@@ -378,7 +395,7 @@
         rating: 4.5,
         imagen: "https://image.tmdb.org/t/p/original/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg"
     },
-    
+
 {
 titulo: "The Shawshank Redemption",
 videoID: "placeholder-1",
@@ -501,14 +518,6 @@ imagen: "https://m.media-amazon.com/images/M/MV5BMTUxMzQyNjA5MF5BMl5BanBnXkFtZTY
 },
 // ... (Las primeras 15 películas anteriores) ...
 {
-titulo: "Alien",
-videoID: "placeholder-16",
-descripcion: "La tripulación de una nave espacial comercial se encuentra con una forma de vida mortal.",
-categoria: "ciencia-ficcion",
-rating: 4.8,
-imagen: "https://m.media-amazon.com/images/M/MV5BMmQ2MmU3NzktZjAxOC00ZDZhLTk4YzEtMDMyMzcxY2IwMDAyXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg"
-},
-{
 titulo: "Terminator 2",
 videoID: "placeholder-17",
 descripcion: "Un cyborg protector viaja en el tiempo para proteger a John Connor.",
@@ -620,14 +629,7 @@ categoria: "drama",
 rating: 4.8,
 imagen: "https://m.media-amazon.com/images/M/MV5BYTViNjMyNmUtNDFkNC00ZDRlLThmMDUtZDU2YWE4NGI2ZjVmXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg"
 },
-{
-titulo: "Apocalypse Now",
-videoID: "placeholder-31",
-descripcion: "Un oficial del ejército estadounidense se adentra en la selva de Vietnam para asesinar a un coronel renegado.",
-categoria: "drama",
-rating: 4.8,
-imagen: "https://m.media-amazon.com/images/M/MV5BZTNkZmU0ZWQtZjQzMy00YTNmLWFmN2MtZGNkMmU1OThmMGYwXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg"
-},
+
 {
 titulo: "Seven",
 videoID: "placeholder-32",
@@ -636,14 +638,7 @@ categoria: "drama",
 rating: 4.8,
 imagen: "https://m.media-amazon.com/images/M/MV5BOTUwODM5MTctZjczMi00OTk4LTg3NWUtNmVhMTAzNTNjYjcyXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg"
 },
-{
-titulo: "The Big Lebowski",
-videoID: "placeholder-33",
-descripcion: "El Dude busca restitución por su alfombra arruinada y se enreda en una extraña aventura.",
-categoria: "comedia",
-rating: 4.7,
-imagen: "https://m.media-amazon.com/images/M/MV5BMTQ0NjUzMDMyOF5BMl5BanBnXkFtZTgwODA1OTU0MDE@._V1_.jpg"
-},
+
 {
 titulo: "L.A. Confidential",
 videoID: "placeholder-34",
@@ -684,14 +679,7 @@ categoria: "drama",
 rating: 4.7,
 imagen: "https://m.media-amazon.com/images/M/MV5BZmExNmEwYWItYmQzOS00YjA5LTk2MjktZjEyZDE1Y2QxNjA1XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg"
 },
-{
-titulo: "Memento",
-videoID: "placeholder-39",
-descripcion: "Un hombre con pérdida de memoria a corto plazo busca al asesino de su esposa.",
-categoria: "drama",
-rating: 4.7,
-imagen: "https://m.media-amazon.com/images/M/MV5BZTcyNjk1MjgtOWI3Mi00YzQwLWI5MTktMzY4ZmI2NDAyNzYzxkewx@.V1_.jpg"
-}, 
+
 // ... Continuaré con más películas en la siguiente parte debido al límite de longitud
 ]; 
 
@@ -812,40 +800,8 @@ imagen: "https://m.media-amazon.com/images/M/MV5BZTcyNjk1MjgtOWI3Mi00YzQwLWI5MTk
         });
 
         renderizarPeliculas();
+       
 
-function shuffle(array) {
-    // Implementación del algoritmo Fisher-Yates shuffle
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-}
-
-function filtrarPeliculas() {
-    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-    let filtered = [...peliculas]; // Creamos una copia del array original
-    
-    // Primero aplicamos el shuffle a la copia
-    filtered = shuffle(filtered);
-
-    if (currentCategory !== 'todos') {
-        if (currentCategory === 'favoritos') {
-            filtered = filtered.filter(p => favorites.includes(p.titulo));
-        } else {
-            filtered = filtered.filter(p => p.categoria === currentCategory);
-        }
-    }
-
-    if (searchTerm) {
-        filtered = filtered.filter(p => 
-            p.titulo.toLowerCase().includes(searchTerm) ||
-            p.descripcion.toLowerCase().includes(searchTerm)
-        );
-    }
-
-    return filtered;
-}
-    </script>
+  </script>
 </body>
 </html>
