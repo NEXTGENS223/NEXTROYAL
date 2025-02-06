@@ -227,6 +227,9 @@
             background: #00ffcc;
             color: #000;
         }
+        .logo img {
+                max-height: 100px;
+        }
 
         /* Media Queries para Responsividad */
         @media (max-width: 768px) {
@@ -307,14 +310,18 @@
             .modal iframe {
                 height: 150px;
             }
+        
+        
+
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="header-content">
-            <div class="header-top">
-                <h1>Next Royal</h1>
+        <div class="header-content">  
+                    <div class="logo">
+                        <img src="logo.png" alt="Logo de NEXTGENS">
+                    </div>
             </div>
             <div class="search-container">
                 <input type="text" class="search-input" placeholder="Buscar películas..." id="searchInput">
@@ -326,7 +333,9 @@
                 <button class="category-btn" data-category="drama">Drama</button>
                 <button class="category-btn" data-category="comedia">Comedia</button>
                 <button class="category-btn" data-category="ciencia-ficcion">Ciencia Ficción</button>
+                <button class="category-btn" data-category="terror">Terror</button>
                 <button class="category-btn" data-category="favoritos">Favoritos</button>
+
             </div>
         </div>
     </header>
@@ -812,7 +821,7 @@ imagen: "https://m.media-amazon.com/images/M/MV5BZTcyNjk1MjgtOWI3Mi00YzQwLWI5MTk
         });
 
         renderizarPeliculas();
-function shuffle(array) {
+        function shuffle(array) {
     // Implementación del algoritmo Fisher-Yates shuffle
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -845,6 +854,6 @@ function filtrarPeliculas() {
 
     return filtered;
 }
-    </script>
+  </script>
 </body>
 </html>
