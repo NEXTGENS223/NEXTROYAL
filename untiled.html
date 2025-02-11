@@ -83,7 +83,7 @@
 
         .category-btn {
             padding: 0.5rem 1rem;
-            background: #1c1c1c;
+            background: #000000;
             border: 2px solid #00ffcc;
             color: #00ffcc;
             border-radius: 20px;
@@ -319,9 +319,8 @@
 <body>
     <header>
         <div class="header-content">  
-                    <div class="logo">
-                        <img src="logo.png" alt="Logo de NEXTGENS">
-                    </div>
+            <div class="logo">
+                <img src="logo.png" alt="Logo de NEXTGENS">
             </div>
             <div class="search-container">
                 <input type="text" class="search-input" placeholder="Buscar películas..." id="searchInput">
@@ -335,7 +334,6 @@
                 <button class="category-btn" data-category="ciencia-ficcion">Ciencia Ficción</button>
                 <button class="category-btn" data-category="terror">Terror</button>
                 <button class="category-btn" data-category="favoritos">Favoritos</button>
-
             </div>
         </div>
     </header>
@@ -347,7 +345,7 @@
 
     <div id="modal" class="modal">
         <div class="modal-content">
-            <button class="modal-close" onclick="cerrarModal()">CIERRA ESA MNDA</button>
+            <button class="modal-close" onclick="cerrarModal()">x</button>
             <h2 id="modal-title"></h2>
             <iframe id="modal-video" frameborder="0" allowfullscreen></iframe>
             <div id="modal-description"></div>
@@ -363,38 +361,56 @@
         const peliculas = [
 
         {
-        titulo: "Cars",
-        videoID: "1L6-dNGt3fF0ozpte_-otJZzpjOMJw_MX",
-        descripcion: "Cars. <br> calidad 1080p.",
-        categoria: "ciencia-ficcion",
-        rating: 4.8,
-        imagen: "https://es.web.img2.acsta.net/pictures/14/05/28/11/24/435900.jpg"
-        },
+titulo: "Rescate en el Tiempo",
+videoID: "1GrETlHbSGWO6mFhA1052NdDYuJKVgmsZ",
+descripcion: "Rescate en el Tiempo calidad 1080p.",
+categoria: "ciencia-ficcion",
+rating: 4.8,
+imagen: "https://www.ecured.cu/images/7/78/Rescate_en_el_Tiempo.jpg"
+},
+
+        {
+titulo: "sonic",
+videoID: "1V8MoL9t1nWJLjw-N8XvuLYfUidWN4rKD",
+descripcion: "Sonic calidad 1080p.",
+categoria: "ciencia-ficcion",
+rating: 4.8,
+imagen: "https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2020/01/sonic-pelicula-posters-personajes-1853875.jpg?tf=1080x"
+},
+
 {
-        titulo: "Wicked",
-        videoID: "1NAuZ1JiR7SasLLYdxNYN1QVqoqIrtW0m",
-        descripcion: "Wicked. <br> Calidad p",
-        categoria: "ciencia-ficcion",
-        rating: 4.8,
-        imagen: "https://es.web.img2.acsta.net/img/4a/a3/4aa3265d76c8d07e0315f48a76205386.jpg"
-    },
-    
-    {
-        titulo: "Matrix",
-        videoID: "1u8mPqF-9_9wxjKTpzyGJz6w-KpY3-3nK",
-        descripcion: "Un hacker descubre la verdad detrás de su realidad.",
-        categoria: "ciencia-ficcion",
-        rating: 4.8,
-        imagen: "https://m.media-amazon.com/images/I/51EG732BV3L._AC_UF894,1000_QL80_.jpg"
-    },
-    {
-        titulo: "SpiderMan No Way Home",
-        videoID: "1vw5KT5zrhWizZ03U8vRQ5ktOsyYd4TCJ",
-        descripcion: "Peter Parker busca ayuda para hacer que el mundo olvide su identidad.",
-        categoria: "accion",
-        rating: 4.5,
-        imagen: "https://image.tmdb.org/t/p/original/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg"
-    },
+titulo: "Cars",
+videoID: "1L6-dNGt3fF0ozpte_-otJZzpjOMJw_MX",
+descripcion: "Cars. <br> calidad 1080p.",
+categoria: "ciencia-ficcion",
+rating: 4.8,
+imagen: "https://es.web.img2.acsta.net/pictures/14/05/28/11/24/435900.jpg"
+},
+{
+titulo: "Wicked",
+videoID: "1NAuZ1JiR7SasLLYdxNYN1QVqoqIrtW0m",
+descripcion: "Wicked. <br> Calidad p",
+categoria: "ciencia-ficcion",
+rating: 4.8,
+imagen: "https://es.web.img2.acsta.net/img/4a/a3/4aa3265d76c8d07e0315f48a76205386.jpg"
+},
+
+{
+titulo: "Matrix",
+videoID: "1u8mPqF-9_9wxjKTpzyGJz6w-KpY3-3nK",
+descripcion: "Un hacker descubre la verdad detrás de su realidad.",
+categoria: "ciencia-ficcion",
+rating: 4.8,
+imagen: "https://m.media-amazon.com/images/I/51EG732BV3L._AC_UF894,1000_QL80_.jpg"
+},
+{
+titulo: "SpiderMan No Way Home",
+videoID: "1vw5KT5zrhWizZ03U8vRQ5ktOsyYd4TCJ",
+descripcion: "Peter Parker busca ayuda para hacer que el mundo olvide su identidad.",
+categoria: "accion",
+rating: 4.5,
+imagen: "https://image.tmdb.org/t/p/original/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg"
+},
 
 {
 titulo: "The Shawshank Redemption",
@@ -683,10 +699,51 @@ imagen: "https://m.media-amazon.com/images/M/MV5BZmExNmEwYWItYmQzOS00YjA5LTk2Mjk
 // ... Continuaré con más películas en la siguiente parte debido al límite de longitud
 ]; 
 
-        function filtrarPeliculas() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            let filtered = peliculas;
 
+        const series = [
+            {
+                titulo: "Breaking Bad",
+                categoria: "drama",
+                imagen: "https://m.media-amazon.com/images/M/MV5BYmQ4YWMxYjUtNjZmYi00MDQ1LWFjMjMtNjA5ZDdiYjdiODU5XkEyXkFqcGdeQXVyMTMzNDExODE5._V1_.jpg",
+                descripcion: "Un profesor de química se convierte en fabricante de drogas.",
+                temporadas: [
+                    {
+                        numero: 1,
+                        episodios: [
+                            {
+                                titulo: "Piloto",
+                                videoID: "series-bb-s01e01",
+                                descripcion: "Walter White recibe un diagnóstico devastador."
+                            },
+                            {
+                                titulo: "El gato en la bolsa",
+                                videoID: "series-bb-s01e02",
+                                descripcion: "Walter y Jesse intentan deshacerse de un cuerpo."
+                            }
+                        ]
+                    },
+                    {
+                        numero: 2,
+                        episodios: [
+                            {
+                                titulo: "Seven Thirty-Seven",
+                                videoID: "series-bb-s02e01",
+                                descripcion: "Walter y Jesse planean su próximo movimiento."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        let currentContentType = 'movies';
+        let currentSeries = null;
+        let currentSeason = null;
+
+        function filtrarContenido() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            let filtered = currentContentType === 'movies' ? peliculas : series;
+            
             if (currentCategory !== 'todos') {
                 if (currentCategory === 'favoritos') {
                     filtered = filtered.filter(p => favorites.includes(p.titulo));
@@ -705,40 +762,96 @@ imagen: "https://m.media-amazon.com/images/M/MV5BZmExNmEwYWItYmQzOS00YjA5LTk2Mjk
             return filtered;
         }
 
-        function renderizarPeliculas() {
-            const peliculasFiltradas = filtrarPeliculas();
+        function renderizarContenido() {
+            if (currentSeries) {
+                renderizarEpisodios();
+                return;
+            }
+
+            const contenidoFiltrado = filtrarContenido();
             const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
             const endIndex = startIndex + ITEMS_PER_PAGE;
-            const peliculasPagina = peliculasFiltradas.slice(startIndex, endIndex);
+            const contenidoPagina = contenidoFiltrado.slice(startIndex, endIndex);
 
             const container = document.getElementById('peliculas');
             container.innerHTML = '';
 
-            peliculasPagina.forEach(pelicula => {
-                const movieElement = document.createElement('div');
-                movieElement.className = 'movie';
-                const isFavorite = favorites.includes(pelicula.titulo);
+            contenidoPagina.forEach(item => {
+                const element = document.createElement('div');
+                element.className = 'movie';
+                const isFavorite = favorites.includes(item.titulo);
 
-                movieElement.innerHTML = `
+                element.innerHTML = `
                     <div class="movie-poster">
-                        <img src="${pelicula.imagen || `https://via.placeholder.com/300x450?text=${pelicula.titulo}`}" 
-                            alt="${pelicula.titulo}"
-                            onerror="this.onerror=null; this.src='https://via.placeholder.com/300x450?text=${pelicula.titulo}'">
+                        <img src="${item.imagen}" alt="${item.titulo}"
+                        onerror="this.src='https://via.placeholder.com/300x450?text=${item.titulo}'">
                     </div>
-                    <button class="favorite-btn" onclick="event.stopPropagation(); toggleFavorite('${pelicula.titulo}')">
+                    <button class="favorite-btn" onclick="event.stopPropagation(); toggleFavorite('${item.titulo}')">
                         ${isFavorite ? '❤️' : '🤍'}
                     </button>
                     <div class="movie-info">
-                        <h3>${pelicula.titulo}</h3>
-                        <p>${pelicula.descripcion}</p>
+                        <h3>${item.titulo}</h3>
+                        <p>${item.descripcion}</p>
                     </div>
                 `;
 
-                movieElement.addEventListener('click', () => mostrarDetalles(pelicula));
-                container.appendChild(movieElement);
+                element.addEventListener('click', () => {
+                    if (currentContentType === 'movies') {
+                        mostrarDetalles(item);
+                    } else {
+                        mostrarSerie(item);
+                    }
+                });
+                container.appendChild(element);
             });
 
-            renderizarPaginacion(peliculasFiltradas.length);
+            renderizarPaginacion(contenidoFiltrado.length);
+        }
+
+        function mostrarSerie(serie) {
+            currentSeries = serie;
+            const container = document.getElementById('peliculas');
+            container.innerHTML = '';
+
+            const seasonSelect = document.createElement('select');
+            seasonSelect.className = 'season-select';
+            serie.temporadas.forEach(temporada => {
+                const option = document.createElement('option');
+                option.value = temporada.numero;
+                option.textContent = `Temporada ${temporada.numero}`;
+                seasonSelect.appendChild(option);
+            });
+
+            seasonSelect.addEventListener('change', (e) => {
+                currentSeason = parseInt(e.target.value);
+                renderizarEpisodios();
+            });
+
+            container.appendChild(seasonSelect);
+            currentSeason = 1;
+            renderizarEpisodios();
+        }
+
+        function renderizarEpisodios() {
+            const container = document.getElementById('peliculas');
+            const episodeContainer = document.createElement('div');
+            episodeContainer.className = 'episode-grid';
+
+            const temporada = currentSeries.temporadas.find(t => t.numero === currentSeason);
+            temporada.episodios.forEach(episodio => {
+                const element = document.createElement('div');
+                element.className = 'episode';
+                element.innerHTML = `
+                    <h3>${episodio.titulo}</h3>
+                    <p>${episodio.descripcion}</p>
+                `;
+                element.addEventListener('click', () => mostrarDetalles(episodio));
+                episodeContainer.appendChild(element);
+            });
+
+            const oldGrid = container.querySelector('.episode-grid');
+            if (oldGrid) container.removeChild(oldGrid);
+            container.appendChild(episodeContainer);
         }
 
         function renderizarPaginacion(totalItems) {
@@ -752,7 +865,7 @@ imagen: "https://m.media-amazon.com/images/M/MV5BZmExNmEwYWItYmQzOS00YjA5LTk2Mjk
                 button.classList.toggle('active', i === currentPage);
                 button.onclick = () => {
                     currentPage = i;
-                    renderizarPeliculas();
+                    renderizarContenido();
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 };
                 paginationContainer.appendChild(button);
@@ -767,14 +880,14 @@ imagen: "https://m.media-amazon.com/images/M/MV5BZmExNmEwYWItYmQzOS00YjA5LTk2Mjk
                 favorites.splice(index, 1);
             }
             localStorage.setItem('favorites', JSON.stringify(favorites));
-            renderizarPeliculas();
+            renderizarContenido();
         }
 
-        function mostrarDetalles(pelicula) {
+        function mostrarDetalles(item) {
             const modal = document.getElementById('modal');
-            document.getElementById('modal-title').textContent = pelicula.titulo;
-            document.getElementById('modal-video').src = `https://drive.google.com/file/d/${pelicula.videoID}/preview`;
-            document.getElementById('modal-description').textContent = pelicula.descripcion;
+            document.getElementById('modal-title').textContent = item.titulo;
+            document.getElementById('modal-video').src = `https://drive.google.com/file/d/${item.videoID}/preview`;
+            document.getElementById('modal-description').textContent = item.descripcion;
             modal.style.display = 'flex';
         }
 
@@ -784,9 +897,10 @@ imagen: "https://m.media-amazon.com/images/M/MV5BZmExNmEwYWItYmQzOS00YjA5LTk2Mjk
             modal.style.display = 'none';
         }
 
+        // Event Listeners
         document.getElementById('searchInput').addEventListener('input', () => {
             currentPage = 1;
-            renderizarPeliculas();
+            renderizarContenido();
         });
 
         document.querySelectorAll('.category-btn').forEach(button => {
@@ -795,13 +909,24 @@ imagen: "https://m.media-amazon.com/images/M/MV5BZmExNmEwYWItYmQzOS00YjA5LTk2Mjk
                 e.target.classList.add('active');
                 currentCategory = e.target.dataset.category;
                 currentPage = 1;
-                renderizarPeliculas();
+                renderizarContenido();
             });
         });
 
-        renderizarPeliculas();
-       
+        document.querySelectorAll('.type-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                document.querySelectorAll('.type-btn').forEach(btn => btn.classList.remove('active'));
+                e.target.classList.add('active');
+                currentContentType = e.target.dataset.type;
+                currentSeries = null;
+                currentSeason = null;
+                currentPage = 1;
+                renderizarContenido();
+            });
+        });
 
-  </script>
+        // Initialize
+        renderizarContenido();
+    </script>
 </body>
 </html>
